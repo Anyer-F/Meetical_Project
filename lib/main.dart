@@ -8,6 +8,8 @@ import 'package:meetical_project/presentation/pages/terms_page.dart';
 import 'package:meetical_project/presentation/pages/privacy_page.dart';
 import 'package:meetical_project/presentation/pages/register_doctor_page.dart';
 import 'package:meetical_project/presentation/pages/reset_password.dart';
+import 'package:meetical_project/presentation/pages/programar_cita.dart';
+import 'package:meetical_project/presentation/pages/calendario_citas.dart';
 
 void main() => runApp(const MeeticalApp());
 
@@ -30,6 +32,16 @@ class MeeticalApp extends StatelessWidget {
         '/register_doctor': (context) => const RegisterDoctorPage(),
         '/recover_password': (context) => const RecoverPasswordPage(),
         '/reset_password': (context) => const ResetPassword(),
+        '/calendario_citas': (context) => const CalendarioCitasScreen(doctor: {}), // Dummy, reemplazado por argumentos
+        '/programar_cita': (context) => const ProgramarCitaScreen(),
+        '/programar_cita': (context) {
+            final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+            return ProgramarCitaPage(
+              doctorId: args['doctorId'],
+              doctorNombre: args['doctorNombre'],
+              patientId: args['patientId'],
+            );
+          },
       },
     );
   }
