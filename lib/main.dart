@@ -9,6 +9,7 @@ import 'package:meetical_project/presentation/pages/terms_page.dart';
 import 'package:meetical_project/presentation/pages/privacy_page.dart';
 import 'package:meetical_project/presentation/pages/register_doctor_page.dart';
 import 'package:meetical_project/presentation/pages/reset_password.dart';
+<<<<<<< HEAD
 =======
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -49,9 +50,15 @@ void main() async {
 
   runApp(const MyApp());
 }
+=======
+import 'package:meetical_project/presentation/pages/programar_cita.dart';
+import 'package:meetical_project/presentation/pages/calendario_citas.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+void main() => runApp(const MeeticalApp());
+>>>>>>> origin/anyer
+
+class MeeticalApp extends StatelessWidget {
+  const MeeticalApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +77,7 @@ class MyApp extends StatelessWidget {
         '/register_doctor': (context) => const RegisterDoctorPage(),
         '/recover_password': (context) => const RecoverPasswordPage(),
         '/reset_password': (context) => const ResetPassword(),
+<<<<<<< HEAD
      
          
 =======
@@ -80,6 +88,18 @@ class MyApp extends StatelessWidget {
         '/doctor_profile':
             (context) => const DoctorProfilePage(), // ✅ Ruta agregada
 >>>>>>> origin/Andy
+=======
+        '/calendario_citas': (context) => const CalendarioCitasScreen(doctor: {}), // Dummy, reemplazado por argumentos
+        '/programar_cita': (context) => const ProgramarCitaScreen(),
+        '/programar_cita': (context) {
+            final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+            return ProgramarCitaPage(
+              doctorId: args['doctorId'],
+              doctorNombre: args['doctorNombre'],
+              patientId: args['patientId'],
+            );
+          },
+>>>>>>> origin/anyer
       },
     );
   }
