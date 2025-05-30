@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Anyer-F/Meetical_Project#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "mongoose": "^8.15.1"

@@ -13,17 +13,23 @@ class CalendarioCitasScreen extends StatefulWidget {
 class _CalendarioCitasScreenState extends State<CalendarioCitasScreen> {
   DateTime selectedDate = DateTime.now();
   final List<String> horariosDisponibles = [
-    '08:00', '09:00', '10:00', '11:00',
-    '14:00', '15:00', '16:00'
+    '08:00',
+    '09:00',
+    '10:00',
+    '11:00',
+    '14:00',
+    '15:00',
+    '16:00',
   ];
 
   List<String> horariosOcupados = ['09:00', '14:00']; //Esto vendría del backend
 
   @override
   Widget build(BuildContext context) {
-    final horariosLibres = horariosDisponibles
-        .where((hora) => !horariosOcupados.contains(hora))
-        .toList();
+    final horariosLibres =
+        horariosDisponibles
+            .where((hora) => !horariosOcupados.contains(hora))
+            .toList();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Calendario de Citas')),
@@ -33,31 +39,39 @@ class _CalendarioCitasScreenState extends State<CalendarioCitasScreen> {
           children: [
             _seleccionFecha(),
             const SizedBox(height: 20),
-            const Text('Horarios Disponibles:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              'Horarios Disponibles:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 10),
             Expanded(
-              child: horariosLibres.isEmpty
-                  ? const Center(child: Text('No hay horarios disponibles para esta fecha'))
-                  : ListView.builder(
-                      itemCount: horariosLibres.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(horariosLibres[index]),
-                          trailing: const Icon(Icons.calendar_today),
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              '/programar_cita',
-                              arguments: {
-                                'doctor': widget.doctor,
-                                'fecha': selectedDate,
-                                'hora': horariosLibres[index],
-                              },
-                            );
-                          },
-                        );
-                      },
-                    ),
+              child:
+                  horariosLibres.isEmpty
+                      ? const Center(
+                        child: Text(
+                          'No hay horarios disponibles para esta fecha',
+                        ),
+                      )
+                      : ListView.builder(
+                        itemCount: horariosLibres.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(horariosLibres[index]),
+                            trailing: const Icon(Icons.calendar_today),
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/programar_cita',
+                                arguments: {
+                                  'doctor': widget.doctor,
+                                  'fecha': selectedDate,
+                                  'hora': horariosLibres[index],
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
             ),
           ],
         ),
@@ -89,7 +103,7 @@ class _CalendarioCitasScreenState extends State<CalendarioCitasScreen> {
             }
           },
           child: const Text('Cambiar Fecha'),
-        )
+        ),
       ],
     );
   }

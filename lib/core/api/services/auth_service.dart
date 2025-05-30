@@ -6,14 +6,17 @@ class AuthService {
 
   ///  Envía un código de recuperación al correo o teléfono del usuario.
   static Future<http.Response> sendRecoveryCode(String emailOrPhone) async {
-    final url = Uri.parse('$baseUrl/auth/send-code'); //  Ajusta si la ruta es diferente en tu API
+    final url = Uri.parse(
+      '$baseUrl/auth/send-code',
+    ); //  Ajusta si la ruta es diferente en tu API
 
     try {
       final response = await http.post(
         url,
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',  // Asegura que el servidor responda en JSON
+          'Accept':
+              'application/json', // Asegura que el servidor responda en JSON
         },
         body: jsonEncode({'emailOrPhone': emailOrPhone}),
       );
@@ -29,36 +32,38 @@ class AuthService {
   }
 
   ///  Verifica el código de recuperación enviado al usuario.
-  static Future<http.Response> verifyRecoveryCode(String emailOrPhone, String code) async {
+  static Future<http.Response> verifyRecoveryCode(
+    String emailOrPhone,
+    String code,
+  ) async {
     final url = Uri.parse('$baseUrl/auth/verify-code');
 
     return await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'emailOrPhone': emailOrPhone,
-        'code': code,
-      }),
+      body: jsonEncode({'emailOrPhone': emailOrPhone, 'code': code}),
     );
   }
 
   ///  Cambia la contraseña del usuario (médico o paciente) usando email/teléfono.
-  static Future<http.Response> resetPassword(String emailOrPhone, String newPassword) async {
+  static Future<http.Response> resetPassword(
+    String emailOrPhone,
+    String newPassword,
+  ) async {
     final url = Uri.parse('$baseUrl/auth/reset-password');
 
     return await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'emailOrPhone': emailOrPhone,
-        'password': newPassword,
-      }),
+      body: jsonEncode({'emailOrPhone': emailOrPhone, 'password': newPassword}),
     );
   }
 
   ///  Registra un médico enviando su información al backend.
-  static Future<http.Response> registerDoctor(Map<String, dynamic> doctorData) async {
-    final url = Uri.parse('$baseUrl/doctors/register'); 
+  static Future<http.Response> registerDoctor(
+    Map<String, dynamic> doctorData,
+  ) async {
+    final url = Uri.parse('$baseUrl/doctors/register');
 
     return await http.post(
       url,
@@ -68,8 +73,10 @@ class AuthService {
   }
 
   /// Registra un paciente enviando su información al backend.
-  static Future<http.Response> registerPatient(Map<String, dynamic> patientData) async {
-    final url = Uri.parse('$baseUrl/patients/register'); 
+  static Future<http.Response> registerPatient(
+    Map<String, dynamic> patientData,
+  ) async {
+    final url = Uri.parse('$baseUrl/patients/register');
 
     return await http.post(
       url,
@@ -79,7 +86,9 @@ class AuthService {
   }
 
   ///  Verifica la respuesta del servidor y maneja errores correctamente.
-  static Future<Map<String, dynamic>> processResponse(http.Response response) async {
+  static Future<Map<String, dynamic>> processResponse(
+    http.Response response,
+  ) async {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
@@ -89,7 +98,10 @@ class AuthService {
   }
 
   ///  Realiza una solicitud con verificación adicional de headers y formato de respuesta.
-  static Future<Map<String, dynamic>> makePostRequest(String endpoint, Map<String, dynamic> data) async {
+  static Future<Map<String, dynamic>> makePostRequest(
+    String endpoint,
+    Map<String, dynamic> data,
+  ) async {
     final url = Uri.parse('$baseUrl/$endpoint');
 
     final response = await http.post(

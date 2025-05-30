@@ -31,11 +31,12 @@ class InfoDoctorScreen extends StatelessWidget {
                   arguments: {
                     'doctorId': doctor['_id'],
                     'doctorNombre': '${doctor['name']} ${doctor['surname']}',
-                    'patientId': 'mockPatientId123', // Reemplaza con el real cuando lo tengas
+                    'patientId':
+                        'mockPatientId123', // Reemplaza con el real cuando lo tengas
                   },
                 );
               },
-              child: const Text('Agendar cita'),  
+              child: const Text('Agendar cita'),
             ),
           ],
         ),

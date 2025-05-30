@@ -24,7 +24,7 @@ class SelectUserTypePage extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 130), // 
+            const SizedBox(height: 130), //
             _buildUserTypeOption(
               context,
               imagePath: 'assets/imagenes/register/medico.jpg',
@@ -36,7 +36,8 @@ class SelectUserTypePage extends StatelessWidget {
               context,
               imagePath: 'assets/imagenes/register/paciente.jpg',
               label: 'Paciente',
-              onPressed: () => Navigator.pushNamed(context, '/register_patient'),
+              onPressed:
+                  () => Navigator.pushNamed(context, '/register_patient'),
             ),
             const Spacer(flex: 3),
             _buildCancelButton(context),
@@ -47,15 +48,16 @@ class SelectUserTypePage extends StatelessWidget {
     );
   }
 
-  Widget _buildUserTypeOption(BuildContext context,
-      {required String imagePath, required String label, required VoidCallback onPressed}) {
+  Widget _buildUserTypeOption(
+    BuildContext context, {
+    required String imagePath,
+    required String label,
+    required VoidCallback onPressed,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundImage: AssetImage(imagePath),
-        ),
+        CircleAvatar(radius: 40, backgroundImage: AssetImage(imagePath)),
         const SizedBox(width: 25),
         ElevatedButton(
           onPressed: onPressed,
@@ -68,7 +70,10 @@ class SelectUserTypePage extends StatelessWidget {
             ),
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
           ),
-          child: Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );

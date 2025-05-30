@@ -36,7 +36,8 @@ class _SplashPageState extends State<SplashPage> {
             height: double.infinity,
             width: double.infinity,
           ),
-          Center( // Solo el logo en el centro
+          Center(
+            // Solo el logo en el centro
             child: Image.asset(
               'assets/imagenes/splash/logo.png',
               width: 800, // Ajusta el tamaño si lo necesitas

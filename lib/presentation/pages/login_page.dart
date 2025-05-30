@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,8 +11,6 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  bool isLoading = false;
-
   @override
   void dispose() {
     emailController.dispose();
@@ -22,61 +18,9 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _login() async {
-    final emailOrPhone = emailController.text.trim();
-    final password = passwordController.text.trim();
-
-    if (emailOrPhone.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor llena todos los campos')),
-      );
-      return;
-    }
-
-    setState(() {
-      isLoading = true;
-    });
-
-    try {
-      final url = Uri.parse('http://10.0.2.2:3000/api/auth/login'); // Android Emulator
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'emailOrPhone': emailOrPhone,
-          'password': password,
-        }),
-      );
-
-      final responseData = jsonDecode(response.body);
-
-      if (response.statusCode == 200) {
-        final userType = responseData['userType'];
-        final userName = responseData['name'];
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Bienvenido $userName')),
-        );
-
-        if (userType == 'doctor') {
-          Navigator.pushNamed(context, '/doctor_home');
-        } else if (userType == 'patient') {
-          Navigator.pushNamed(context, '/search_patient_home');
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(responseData['message'] ?? 'Error al iniciar sesión')),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error de conexión: $e')),
-      );
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
-    }
+  void _login() {
+    // Ir directamente a la pantalla principal sin validar nada
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   @override
@@ -104,7 +48,9 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 20),
                         const CircleAvatar(
                           radius: 50,
-                          backgroundImage: AssetImage('assets/imagenes/login/user_icon.jpg'),
+                          backgroundImage: AssetImage(
+                            'assets/imagenes/login/user_icon.jpg',
+                          ),
                         ),
                         const SizedBox(height: 30),
                         TextField(
@@ -125,13 +71,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 20),
                         ElevatedButton(
-                          onPressed: isLoading ? null : _login,
+                          onPressed: _login,
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size.fromHeight(50),
                           ),
-                          child: isLoading
-                              ? const CircularProgressIndicator(color: Colors.white)
-                              : const Text("Iniciar Sesión"),
+                          child: const Text("Iniciar Sesión"),
                         ),
                         const SizedBox(height: 10),
                         TextButton(

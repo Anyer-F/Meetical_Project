@@ -13,8 +13,7 @@ class PrivacyPage extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Text(
-            '''
+          child: Text('''
 Meetical se compromete a proteger la privacidad de sus usuarios. Esta política describe cómo se recopila, utiliza y protege la información personal.
 
 1. Protección de Datos Personales**
@@ -36,9 +35,7 @@ Meetical se compromete a proteger la privacidad de sus usuarios. Esta política 
 5. Responsabilidad en la Seguridad**
 - Meetical no se hace responsable por accesos no autorizados si el usuario comparte sus credenciales con terceros.
 - Se recomienda a los usuarios mantener contraseñas seguras y no divulgar información sensible.
-            ''',
-            style: TextStyle(fontSize: 16, height: 1.5),
-          ),
+            ''', style: TextStyle(fontSize: 16, height: 1.5)),
         ),
       ),
     );

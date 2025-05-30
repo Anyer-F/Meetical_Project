@@ -163,30 +163,19 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-  http:
-    dependency: "direct main"
-    description:
-      name: http
-      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.13.6"
-=======
   flutter_web_plugins:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: "2c11f3f94c687ee9bad77c171151672986360b2b001d109814ee7140b2cf261b"
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
->>>>>>> origin/Andy
   http_parser:
     dependency: transitive
     description:
@@ -195,8 +184,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
-<<<<<<< HEAD
-=======
   image:
     dependency: transitive
     description:
@@ -213,7 +200,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.20.2"
->>>>>>> origin/Andy
   leak_tracker:
     dependency: transitive
     description:
@@ -411,8 +397,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.4"
-<<<<<<< HEAD
-=======
   timezone:
     dependency: "direct main"
     description:
@@ -421,7 +405,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
->>>>>>> origin/Andy
   typed_data:
     dependency: transitive
     description:

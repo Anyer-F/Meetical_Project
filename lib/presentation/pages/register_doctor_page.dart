@@ -50,80 +50,93 @@ class _RegisterDoctorPageState extends State<RegisterDoctorPage> {
       });
     }
   }
-Future<void> validateAndSubmit() async {
-  setState(() {
-    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-    emailError = emailRegex.hasMatch(emailController.text) ? null : 'Correo Electrónico incorrecto';
-    passwordError = passwordController.text.length < 8 ? 'Debe tener al menos 8 caracteres' : null;
-    confirmPasswordError = confirmPasswordController.text != passwordController.text
-        ? 'La contraseña no coincide'
-        : null;
-    birthDateError = birthdateController.text.isEmpty ? 'Debe seleccionar una fecha de nacimiento' : null;
-  });
 
-  if (emailError == null &&
-      passwordError == null &&
-      confirmPasswordError == null &&
-      birthDateError == null &&
-      termsAccepted) {
-    final payload = {
-      "name": nameController.text,
-      "surname": surnameController.text,
-      "email": emailController.text,
-      "phone": phoneController.text,
-      "birthDate": birthdateController.text,
-      "title": titleController.text,
-      "specialty": specialtyController.text,
-      "registerNumber": registerNumberController.text,
-      "location": locationController.text,
-      "clinicNumber": clinicNumberController.text,
-      "gender": gender,
-      "password": passwordController.text,
-      "notificationsEnabled": notificationsEnabled,
-      "termsAccepted": termsAccepted,
-    };
+  Future<void> validateAndSubmit() async {
+    setState(() {
+      final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+      emailError =
+          emailRegex.hasMatch(emailController.text)
+              ? null
+              : 'Correo Electrónico incorrecto';
+      passwordError =
+          passwordController.text.length < 8
+              ? 'Debe tener al menos 8 caracteres'
+              : null;
+      confirmPasswordError =
+          confirmPasswordController.text != passwordController.text
+              ? 'La contraseña no coincide'
+              : null;
+      birthDateError =
+          birthdateController.text.isEmpty
+              ? 'Debe seleccionar una fecha de nacimiento'
+              : null;
+    });
 
-    try {
-      final response = await AuthService.registerDoctor(payload);
+    if (emailError == null &&
+        passwordError == null &&
+        confirmPasswordError == null &&
+        birthDateError == null &&
+        termsAccepted) {
+      final payload = {
+        "name": nameController.text,
+        "surname": surnameController.text,
+        "email": emailController.text,
+        "phone": phoneController.text,
+        "birthDate": birthdateController.text,
+        "title": titleController.text,
+        "specialty": specialtyController.text,
+        "registerNumber": registerNumberController.text,
+        "location": locationController.text,
+        "clinicNumber": clinicNumberController.text,
+        "gender": gender,
+        "password": passwordController.text,
+        "notificationsEnabled": notificationsEnabled,
+        "termsAccepted": termsAccepted,
+      };
 
-      if (response.statusCode == 201) {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) => AlertDialog(
-            title: const Text('¡Registro exitoso!'),
-            content: const Text('Médico registrado correctamente.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.pushReplacementNamed(context, '/home');
-                },
-                child: const Text('OK'),
+      try {
+        final response = await AuthService.registerDoctor(payload);
+
+        if (response.statusCode == 201) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder:
+                (_) => AlertDialog(
+                  title: const Text('¡Registro exitoso!'),
+                  content: const Text('Médico registrado correctamente.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.pushReplacementNamed(context, '/home');
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+          );
+        } else {
+          try {
+            final body = jsonDecode(response.body);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Error: ${body['message'] ?? response.body}'),
               ),
-            ],
-          ),
-        );
-      } else {
-        try {
-          final body = jsonDecode(response.body);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error: ${body['message'] ?? response.body}')),
-          );
-        } catch (_) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error inesperado: ${response.body}')),
-          );
+            );
+          } catch (_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Error inesperado: ${response.body}')),
+            );
+          }
         }
+      } catch (e) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error de red: $e')));
       }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error de red: $e')),
-      );
     }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -135,9 +148,16 @@ Future<void> validateAndSubmit() async {
           children: [
             CustomTextField(labelText: 'Nombres', controller: nameController),
             const SizedBox(height: 12),
-            CustomTextField(labelText: 'Apellidos', controller: surnameController),
+            CustomTextField(
+              labelText: 'Apellidos',
+              controller: surnameController,
+            ),
             const SizedBox(height: 12),
-            CustomTextField(labelText: 'Correo Electrónico', controller: emailController, errorText: emailError),
+            CustomTextField(
+              labelText: 'Correo Electrónico',
+              controller: emailController,
+              errorText: emailError,
+            ),
             const SizedBox(height: 12),
             CustomTextField(labelText: 'Teléfono', controller: phoneController),
             const SizedBox(height: 12),
@@ -145,7 +165,10 @@ Future<void> validateAndSubmit() async {
             GestureDetector(
               onTap: () => selectDate(context),
               child: AbsorbPointer(
-                child: CustomTextField(labelText: 'Fecha de Nacimiento', controller: birthdateController),
+                child: CustomTextField(
+                  labelText: 'Fecha de Nacimiento',
+                  controller: birthdateController,
+                ),
               ),
             ),
             if (birthDateError != null)
@@ -158,23 +181,51 @@ Future<void> validateAndSubmit() async {
               ),
             const SizedBox(height: 12),
 
-            CustomTextField(labelText: 'Título Médico', controller: titleController),
+            CustomTextField(
+              labelText: 'Título Médico',
+              controller: titleController,
+            ),
             const SizedBox(height: 12),
-            CustomTextField(labelText: 'Especialidad', controller: specialtyController),
+            CustomTextField(
+              labelText: 'Especialidad',
+              controller: specialtyController,
+            ),
             const SizedBox(height: 12),
-            CustomTextField(labelText: 'Número de Registro', controller: registerNumberController),
+            CustomTextField(
+              labelText: 'Número de Registro',
+              controller: registerNumberController,
+            ),
             const SizedBox(height: 12),
-            CustomTextField(labelText: 'Ubicación', controller: locationController),
+            CustomTextField(
+              labelText: 'Ubicación',
+              controller: locationController,
+            ),
             const SizedBox(height: 12),
-            CustomTextField(labelText: 'Número de Clínica', controller: clinicNumberController),
+            CustomTextField(
+              labelText: 'Número de Clínica',
+              controller: clinicNumberController,
+            ),
             const SizedBox(height: 12),
 
-            GenderDropdown(value: gender, onChanged: (v) => setState(() => gender = v)),
+            GenderDropdown(
+              value: gender,
+              onChanged: (v) => setState(() => gender = v),
+            ),
             const SizedBox(height: 12),
 
-            CustomTextField(labelText: 'Contraseña', controller: passwordController, obscureText: true, errorText: passwordError),
+            CustomTextField(
+              labelText: 'Contraseña',
+              controller: passwordController,
+              obscureText: true,
+              errorText: passwordError,
+            ),
             const SizedBox(height: 12),
-            CustomTextField(labelText: 'Confirmar Contraseña', controller: confirmPasswordController, obscureText: true, errorText: confirmPasswordError),
+            CustomTextField(
+              labelText: 'Confirmar Contraseña',
+              controller: confirmPasswordController,
+              obscureText: true,
+              errorText: confirmPasswordError,
+            ),
             const SizedBox(height: 12),
 
             SwitchListTile(
@@ -191,13 +242,35 @@ Future<void> validateAndSubmit() async {
                 children: [
                   const Text("Aceptar "),
                   GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TermsPage())),
-                    child: const Text("Términos", style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline)),
+                    onTap:
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const TermsPage()),
+                        ),
+                    child: const Text(
+                      "Términos",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
                   ),
                   const Text(" y "),
                   GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPage())),
-                    child: const Text("Política", style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline)),
+                    onTap:
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const PrivacyPage(),
+                          ),
+                        ),
+                    child: const Text(
+                      "Política",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
                   ),
                 ],
               ),

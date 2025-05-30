@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meetical_project/core/api/service/appointment_service.dart'; // Asegúrate de usar la ruta correcta
+import 'package:meetical_project/core/api/services/appointment_service.dart'; // Asegúrate de usar la ruta correcta
 
 class ProgramarCitaPage extends StatefulWidget {
   final String doctorId;
@@ -65,17 +65,16 @@ class _ProgramarCitaPageState extends State<ProgramarCitaPage> {
     final doctorNombre = widget.doctorNombre;
     final patientId = widget.patientId;
 
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Programar Cita'),
-      ),
+      appBar: AppBar(title: const Text('Programar Cita')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text('Doctor: $doctorNombre',
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(
+              'Doctor: $doctorNombre',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
 
             const SizedBox(height: 20),
 
@@ -91,9 +90,11 @@ class _ProgramarCitaPageState extends State<ProgramarCitaPage> {
                   setState(() => _fechaSeleccionada = fecha);
                 }
               },
-              child: Text(_fechaSeleccionada == null
-                  ? 'Seleccionar fecha'
-                  : 'Fecha: ${dateFormatter.format(_fechaSeleccionada!)}'),
+              child: Text(
+                _fechaSeleccionada == null
+                    ? 'Seleccionar fecha'
+                    : 'Fecha: ${dateFormatter.format(_fechaSeleccionada!)}',
+              ),
             ),
 
             const SizedBox(height: 20),
@@ -108,17 +109,21 @@ class _ProgramarCitaPageState extends State<ProgramarCitaPage> {
                   setState(() => _horaInicioSeleccionada = hora);
                 }
               },
-              child: Text(_horaInicioSeleccionada == null
-                  ? 'Seleccionar hora de inicio'
-                  : 'Hora: ${_horaInicioSeleccionada!.format(context)}'),
+              child: Text(
+                _horaInicioSeleccionada == null
+                    ? 'Seleccionar hora de inicio'
+                    : 'Hora: ${_horaInicioSeleccionada!.format(context)}',
+              ),
             ),
 
             const SizedBox(height: 30),
 
             ElevatedButton(
-              onPressed: (_fechaSeleccionada != null && _horaInicioSeleccionada != null)
-                  ? _programarCita
-                  : null,
+              onPressed:
+                  (_fechaSeleccionada != null &&
+                          _horaInicioSeleccionada != null)
+                      ? _programarCita
+                      : null,
               child: const Text('Solicitar cita'),
             ),
           ],

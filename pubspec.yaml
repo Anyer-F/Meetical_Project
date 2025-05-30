@@ -10,17 +10,14 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-<<<<<<< HEAD
-  http: ^0.13.5
-  
-=======
+  http: ^1.1.0
   table_calendar: ^3.0.6
-  flutter_local_notifications: ^19.2.1   # ✅ <-- AÑADIDO AQUÍ
-  timezone: 0.10.1
+  flutter_local_notifications: ^19.2.1
+  timezone: ^0.10.1
   pdf: ^3.10.4
   printing: ^5.12.0
+ 
 
->>>>>>> origin/Andy
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -30,7 +27,6 @@ flutter:
   uses-material-design: true
 
   assets:
-<<<<<<< HEAD
     - assets/imagenes/splash/splash_background.png
     - assets/imagenes/splash/logo.png
     - assets/imagenes/splash/overlay.png
@@ -39,17 +35,8 @@ flutter:
     - assets/imagenes/register/fondo_registro.png
     - assets/imagenes/register/medico.jpg
     - assets/imagenes/register/paciente.jpg
-
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
-=======
     - assets/images/logo.png
-    - assets/sounds/notification.mp3   # ✅ sonido agregado aquí
-
->>>>>>> origin/Andy
+    - assets/sounds/notification.mp3
 
 
 

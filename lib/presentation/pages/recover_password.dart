@@ -40,14 +40,18 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
       } else {
         final body = jsonDecode(response.body);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${body['error'] ?? 'No se pudo enviar el código'}')),
+          SnackBar(
+            content: Text(
+              'Error: ${body['error'] ?? 'No se pudo enviar el código'}',
+            ),
+          ),
         );
       }
     } catch (e) {
       print("❌ Error en la solicitud: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error de red: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error de red: $e')));
     }
   }
 
@@ -72,14 +76,18 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
       } else {
         final body = jsonDecode(response.body);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Código inválido: ${body['error'] ?? 'Código incorrecto'}')),
+          SnackBar(
+            content: Text(
+              'Código inválido: ${body['error'] ?? 'Código incorrecto'}',
+            ),
+          ),
         );
       }
     } catch (e) {
       print("❌ Error en la verificación: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error de red: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error de red: $e')));
     }
   }
 
@@ -107,10 +115,7 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
               controller: emailOrPhoneController,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: sendCode,
-              child: const Text("Enviar"),
-            ),
+            ElevatedButton(onPressed: sendCode, child: const Text("Enviar")),
             const SizedBox(height: 24),
             if (showVerificationField) ...[
               CustomTextField(

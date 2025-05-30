@@ -17,12 +17,14 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   void validateAndSubmit(String emailOrPhone) {
     setState(() {
-      passwordError = passwordController.text.length < 8
-          ? "Debe tener al menos 8 caracteres"
-          : null;
-      confirmError = passwordController.text != confirmController.text
-          ? "La contraseña no coincide"
-          : null;
+      passwordError =
+          passwordController.text.length < 8
+              ? "Debe tener al menos 8 caracteres"
+              : null;
+      confirmError =
+          passwordController.text != confirmController.text
+              ? "La contraseña no coincide"
+              : null;
     });
 
     if (passwordError == null && confirmError == null) {

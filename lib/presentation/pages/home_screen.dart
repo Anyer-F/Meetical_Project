@@ -2,13 +2,59 @@ import 'package:flutter/material.dart';
 import '../pages/recordatorio_page.dart';
 import '../pages/historial_medico_page.dart';
 import '../pages/seguimiento_consultas_page.dart';
+import '../pages/login_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  void _mostrarDialogoCerrarSesion(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Cerrar sesión"),
+          content: const Text("¿Quieres cerrar sesión?"),
+          actions: [
+            TextButton(
+              child: const Text("Cancelar"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el diálogo
+              },
+            ),
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el diálogo
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LoginPage()),
+                  (route) => false,
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('MEETICAL'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _mostrarDialogoCerrarSesion(context),
+            tooltip: 'Cerrar sesión',
+          ),
+        ],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: Colors.black87,
+      ),
+      extendBodyBehindAppBar: true,
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -73,7 +119,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
 
-      // ✅ BOTTOM NAV BAR con botón a DoctorProfilePage
+      // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white.withOpacity(0.9),
         selectedItemColor: Colors.black,

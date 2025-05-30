@@ -13,8 +13,7 @@ class TermsPage extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Text(
-            '''
+          child: Text('''
 Meetical es una aplicación digital destinada a la gestión de citas médicas, proporcionando accesibilidad, organización y eficiencia en la prestación de servicios de salud. Al utilizar nuestra plataforma, aceptas los siguientes términos y condiciones.
 
 1. Uso de la Aplicación**
@@ -37,9 +36,7 @@ Meetical es una aplicación digital destinada a la gestión de citas médicas, p
 
 5. Modificaciones y Actualizaciones**
 - Meetical se reserva el derecho de actualizar sus funciones y términos sin previo aviso.
-            ''',
-            style: TextStyle(fontSize: 16, height: 1.5),
-          ),
+            ''', style: TextStyle(fontSize: 16, height: 1.5)),
         ),
       ),
     );
