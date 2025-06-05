@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+/*
 import 'package:meetical_project/presentation/pages/recover_password.dart';
 import 'package:meetical_project/presentation/pages/splash_page.dart';
 import 'package:meetical_project/presentation/pages/login_page.dart';
@@ -10,7 +11,11 @@ import 'package:meetical_project/presentation/pages/register_doctor_page.dart';
 import 'package:meetical_project/presentation/pages/reset_password.dart';
 import 'package:meetical_project/presentation/pages/programar_cita.dart';
 import 'package:meetical_project/presentation/pages/calendario_citas.dart';
+import 'package:meetical_project/presentation/pages/notificaciones_page.dart';
+*/
+import 'package:meetical_project/presentation/pages/filtrar_doctores.dart';
 
+/*
 void main() => runApp(const MeeticalApp());
 
 class MeeticalApp extends StatelessWidget {
@@ -33,7 +38,8 @@ class MeeticalApp extends StatelessWidget {
         '/recover_password': (context) => const RecoverPasswordPage(),
         '/reset_password': (context) => const ResetPassword(),
         '/calendario_citas': (context) => const CalendarioCitasScreen(doctor: {}), // Dummy, reemplazado por argumentos
-        '/programar_cita': (context) => const ProgramarCitaScreen(),
+        //'/programar_cita': (context) => const ProgramarCitaScreen(),
+        '/notificaciones': (context) => NotificacionesPage(),
         '/programar_cita': (context) {
             final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
             return ProgramarCitaPage(
@@ -43,6 +49,25 @@ class MeeticalApp extends StatelessWidget {
             );
           },
       },
+    );
+  }
+}*/
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'App de Doctores',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const FiltrarDoctoresScreen(),
     );
   }
 }

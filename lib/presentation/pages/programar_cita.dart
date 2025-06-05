@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meetical_project/core/api/service/appointment_service.dart'; // Asegúrate de usar la ruta correcta
+import 'package:meetical_project/core/api/services/appointment_service.dart';
+ // Asegúrate de usar la ruta correcta
 
 class ProgramarCitaPage extends StatefulWidget {
   final String doctorId;

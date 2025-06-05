@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:meetical_project/presentation/pages/info_doctor.dart';
 
 class FiltrarDoctoresScreen extends StatefulWidget {
   const FiltrarDoctoresScreen({super.key});
-
+  
   @override
   State<FiltrarDoctoresScreen> createState() => _FiltrarDoctoresScreenState();
 }
